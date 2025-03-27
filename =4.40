@@ -1,0 +1,16 @@
+Looking in indexes: https://pypi.tuna.tsinghua.edu.cn/simple
+Collecting transformers
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/f7/3c/41274bc4729e167021acd2aa41879bf0cf2c1911e77b0a0fa410c442307a/transformers-4.50.2-py3-none-any.whl (10.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.2/10.2 MB 2.2 MB/s eta 0:00:00
+Collecting datasets
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/16/44/5de560a2625d31801895fb2663693df210c6465960d61a99192caa9afd63/datasets-3.4.1-py3-none-any.whl (487 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 487.4/487.4 kB 6.9 MB/s eta 0:00:00
+Collecting accelerate
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/70/83/167d4b638bb758a966828eb8d23c5e7047825edfdf768ff5f4fb01440063/accelerate-1.5.2-py3-none-any.whl (345 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 345.1/345.1 kB 2.7 MB/s eta 0:00:00
+Collecting peft
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/c3/0a/01efce80e60ce8b11adc90ac9077e4fe3b0fa2f4b03aa459206588e8f7bc/peft-0.15.0-py3-none-any.whl (410 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 410.8/410.8 kB 2.5 MB/s eta 0:00:00
+Collecting bitsandbytes
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/3c/c7/36f41619278a67a51e00d7890c3542195295467453ec74ec23dc5940b265/bitsandbytes-0.45.4-py3-none-manylinux_2_24_x86_64.whl (76.0 MB)
+     ━━━━━━━━━                                17.5/76.0 MB 2.5 MB/s eta 0:00:24
