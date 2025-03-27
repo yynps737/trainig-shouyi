@@ -454,7 +454,7 @@ class SophiaG(Optimizer):
 
         return loss
 
-    def _estimate_hessian_diagonal(self, p, grad, group):
+    def _estimate_hessian_diagonal(self, p, grad, group, loss=None):
         """
         估计Hessian对角线
         """

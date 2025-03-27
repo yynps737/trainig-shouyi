@@ -198,7 +198,7 @@ class Visualizer:
     def plot_class_activation_map(self, image: torch.Tensor,
                                   cam: np.ndarray,
                                   title: str = "类激活映射",
-                                  save_path: Optional[str] = None) -> Figure:
+                                  save_path: Optional[str] = None, skimage=None) -> Figure:
         """
         绘制类激活映射
 

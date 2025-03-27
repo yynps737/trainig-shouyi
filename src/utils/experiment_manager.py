@@ -1,3 +1,6 @@
+import torch
+
+
 class ExperimentTracker:
     """
     实验跟踪器
@@ -219,3 +222,7 @@ class ExperimentTracker:
             hours, remainder = divmod(seconds, 3600)
             minutes, seconds = divmod(remainder, 60)
             return f"{int(hours)}h {int(minutes)}m"
+
+
+class ExperimentManager:
+    pass
