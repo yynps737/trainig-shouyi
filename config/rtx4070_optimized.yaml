@@ -1,0 +1,91 @@
+project_name: aixunliancang
+device: cuda
+output_dir: outputs
+
+# 硬件配置 - 专为RTX 4070优化
+hardware:
+  gpu_name: "RTX 4070"
+  vram_gb: 12
+  cuda_version: "12.4"
+  cuda_cores: 5888
+  tensor_cores: 184
+  fp16_performance: true
+  bf16_performance: false  # RTX 4070不支持原生bfloat16
+
+# 模型配置
+model:
+  # 批次大小优化（针对12GB显存）
+  batch_size: 128  # 较大批次利用张量核心
+  # 维度优化（全部为32的倍数，以便充分利用Tensor Core）
+  width_multiplier: 1.0
+  depth_multiplier: 1.0
+  d_model: 768  # 针对RTX 4070优化的Transformer隐藏维度
+  nhead: 12  # 注意力头数（768/12=64，符合推荐的64维头）
+  num_layers: 8
+  dim_feedforward: 3072  # 前馈网络维度
+  dropout_rate: 0.1
+  mixed_precision: true  # 启用FP16混合精度
+  gradient_checkpointing: true  # 启用梯度检查点
+  max_seq_len: 8192  # 序列长度，根据任务和显存调整
+  vocab_size: 30000  # 词汇量大小（针对NLP任务）
+
+# 优化配置
+optimization:
+  optimizer: "lion"  # 高效优化器，更低的显存占用
+  learning_rate: 3e-4  # Lion优化器推荐学习率
+  weight_decay: 0.01
+  # 学习率计划
+  scheduler: "cosine_warmup_restarts"
+  warmup_steps: 200
+  gradient_accumulation_steps: 2  # 模拟更大批次
+  # 混合精度
+  mixed_precision: true
+  mixed_precision_dtype: "float16"  # RTX 4070使用FP16
+  # PyTorch 2.0+编译器
+  compiler_enabled: true
+  compile_mode: "max-autotune"  # 最大性能自动调优
+  # 高级优化
+  use_8bit: true  # 使用8位优化器
+  memory_efficient_attention: true  # 内存高效注意力
+  cpu_offload: false  # CPU卸载（除非显存不足，一般不启用）
+  tensor_core_optimized: true  # 优化Tensor Core使用
+  # 优化级别
+  optimization_level: "medium"  # auto/light/medium/max
+
+# 训练配置
+training:
+  epochs: 100
+  early_stopping_patience: 10
+  checkpoint_interval: 1000  # 每1000步保存一次
+  eval_interval: 1  # 每轮评估一次
+  log_interval: 10  # 每10步记录一次
+  save_interval: 500  # 每500步保存一次
+  gradient_clip: 1.0
+  track_memory: true  # 记录内存使用
+  # 损失函数
+  loss: "label_smoothing"  # 标签平滑交叉熵损失
+  label_smoothing: 0.1
+
+# 数据配置
+data:
+  num_workers: 4  # 根据CPU核心数调整
+  prefetch_factor: 2
+  pin_memory: true
+  persistent_workers: true
+  # 数据增强
+  augmentation_level: "medium"  # light/medium/heavy
+  mixup_alpha: 0.2  # 启用Mixup数据增强
+  cutmix_alpha: 0.0  # 禁用CutMix数据增强
+
+# 分布式训练配置
+distributed:
+  enabled: false  # 是否启用分布式训练
+  backend: "nccl"  # 分布式后端
+  find_unused_parameters: false  # 查找未使用参数
+
+# TensorCore优化提示
+# 1. 保持所有矩阵维度为8的倍数，最好是32的倍数
+# 2. 使用FP16混合精度
+# 3. 启用TF32加速（CUDA 11.0+）
+# 4. 使用较大批次以充分利用并行能力
+# 5. 使用编译器优化（PyTorch 2.0+）
