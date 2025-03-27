@@ -1,0 +1,7 @@
+PyTorch: 2.6.0+cu124
+CUDA: 12.4
+GPU: NVIDIA GeForce RTX 4070 (12GB VRAM)
+矩阵运算加速比: 29-45x
+系统: WSL2 Ubuntu 22.04
+IDE: PyCharm 2025.1 EAP
+Python: 3.10
