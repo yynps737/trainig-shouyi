@@ -15,8 +15,9 @@ from typing import Dict, Any, Optional, List, Tuple
 # 导入自定义模块
 from src.config.config import load_config
 from src.models.advanced_models import RTXEfficientNet, FastRTXTransformer, build_rtx_optimized_model
-from src.utils.advanced_optimizers import get_advanced_optimizer, get_advanced_scheduler, mixed_precision_context
-from src.utils.memory_optimization import MemoryOptimizer, MemoryTracker, profile_memory_usage
+# 修复这里：修正导入混合精度上下文的位置
+from src.utils.advanced_optimizers import get_advanced_optimizer, get_advanced_scheduler
+from src.utils.memory_optimization import MemoryOptimizer, MemoryTracker, profile_memory_usage, mixed_precision_context
 from src.utils.experiment_manager import ExperimentManager, ExperimentTracker
 from src.utils.distributed import setup_distributed, get_data_parallel_model, spawn_processes, cleanup_distributed, \
     is_main_process
